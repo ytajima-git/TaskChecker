@@ -11,18 +11,14 @@ Office.onReady((info) => {
     document.getElementById("app-body").style.display = "flex";
     var app_body = document.getElementById("app-body");
     app_body.children[0].innerHTML = "<b>Get Message</b> <br/>";
-    document.getElementById("run").onclick = run;
+    var item = Office.context.mailbox.item;
+    item.body.getAsync(
+      "text",
+      { asyncContext: "This is passed to the callback" },
+      function callback(result) {
+        // Write message property value to the task pane
+        document.getElementById("item-subject").innerHTML = "<b>Message:</b> <br/>" + result.value;
+      });
   }
 });
 
-export async function run() {
-  // Get a reference to the current message
-  var item = Office.context.mailbox.item;
-  item.body.getAsync(
-    "text",
-    { asyncContext: "This is passed to the callback" },
-    function callback(result) {
-      // Write message property value to the task pane
-      document.getElementById("item-subject").innerHTML = "<b>Message:</b> <br/>" + result.value;
-    });
-}
