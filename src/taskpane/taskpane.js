@@ -10,7 +10,7 @@ Office.onReady((info) => {
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
     var app_body = document.getElementById("app-body");
-    app_body.children[0].innerHTML = "<b>Get Messa</b> <br/>";
+    app_body.children[0].innerHTML = "<b>Get Message</b> <br/>";
     var item = Office.context.mailbox.item;
     item.body.getAsync(
       "text",
