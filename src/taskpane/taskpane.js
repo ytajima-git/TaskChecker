@@ -16,9 +16,15 @@ Office.onReady((info) => {
       "text",
       { asyncContext: "This is passed to the callback" },
       function callback(result) {
-        // Write message property value to the task pane
-        document.getElementById("item-subject").innerHTML = "<b>Message:</b> <br/>" + result.value;
-      });
-  }
-});
+        const message = result.value;
+        const TinySegmenter = require('tiny-segmenter');
+        const tinySegmenter = new TinySegmenter();
 
+        // const tfjs = require('@tensorflow/tfjs');
+        // require('@tensorflow/tfjs-node');
+
+        const segments = tinySegmenter.segment(message);
+        document.getElementById("item-subject").innerHTML = "<b>Message:</b> <br/>" + segments;
+      });
+  };
+});
